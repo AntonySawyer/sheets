@@ -1,5 +1,5 @@
 var letters = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var numbers = 100;
+var numbers = 30;
 
 function onInit(){
     for (i = 0; i < letters.length; i++) {
@@ -21,7 +21,7 @@ function onInit(){
             newCell.innerHTML = "<td><input type=\"text\" class=\"tabs\" value=\""
                               + "\" id=\""
                               + letters[j+1] + i 
-                              + "\"></input></td>";
+                              + "\" onchange=\"calculate(this)\"></input></td>";
         }
     }
     addButton();
@@ -29,11 +29,8 @@ function onInit(){
 
 function addRows() {
     deleteButton();
-//    var btn = document.getElementById("addRows")[0];
-//    btn.remove();
     var currentNumber = document.getElementById("table").rows.length + 1;
-    var numbers = 100;
-        for (i = currentNumber; i < currentNumber + 100; i++) {
+        for (i = currentNumber; i < currentNumber + numbers; i++) {
         var tr = document.createElement("tr");
             tr.innerHTML = "<tr><td><input type=\"text\" disabled class=\"main_tabs tabs\" value=\""
                          + i
@@ -44,7 +41,7 @@ function addRows() {
             newCell.innerHTML = "<td><input type=\"text\" class=\"tabs\" value=\""
                               + "\" id=\""
                               + letters[j+1] + i 
-                              + "\"></input></td>";
+                              + "\" onchange=\"calculate(this)\"></input></td>";
         }
     }
     addButton();
@@ -58,4 +55,19 @@ function addButton(){
 
 function deleteButton(){
     table.deleteRow(-1);
+}
+
+function calculate(value){
+  var id = value.getAttribute('id');
+  var expression = value.value; 
+    if(expression.charAt(0) == '=') {
+      var expression = expression.substr(1); 
+        if(typeof +expression == 'number') {
+      document.getElementById(id).value = eval(expression);
+      } else {
+        alert('Is not a number!');
+      }
+    } else {
+      alert('Expression must start by "="');
+    }
 }
