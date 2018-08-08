@@ -38,7 +38,7 @@ function addRows() {
 
 function addButton(){
     var button = document.createElement("tr");
-    button.innerHTML = "<tr id=\"addRows\"><td colspan=\"27\"><input type=\"button\" class=\"add_rows\" value=\"+++ add new cells +++\" onClick=\"addRows()\"></input></td></tr>";
+    button.innerHTML = "<tr id=\"addRows\"><td colspan=\"27\"><input type=\"button\" class=\"add_rows\" value=\"+++ add new rows +++\" onClick=\"addRows()\"></input></td></tr>";
     document.getElementById("tbody").appendChild(button);
 }
 
@@ -71,5 +71,5 @@ function  input_class(t_id){
     document.getElementById(i_id).setAttribute('class', 'tabs tabs_visible');
   } 
   document.getElementById('formula_textarea').value = document.getElementById(i_id).value;
-  document.getElementById('currentCell').innerHTML = 'Current cell: ' + i_id.substr(2);
+  document.getElementById('currentCell').innerHTML = 'Current cell: <span class=\"currentCellNumber\">' + i_id.substr(2) + '</span>';
 }

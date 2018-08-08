@@ -86,9 +86,7 @@ input[type=text]:focus {
 	background-color: cyan;
 }
 
-.eval_expression {
-	
-}
+
 
 tbody td {
 	cursor: cell;	
@@ -138,5 +136,19 @@ textarea {
 }
 
 #currentCell {
+	font-size: 14px;
+	letter-spacing: 1.5;
+}
+
+.currentCellNumber {
 	font-size: 16px;
+	color: CadetBlue;
+	font-weight: 800;
+	display: inline-block;
+}
+
+.currentCellNumber::first-letter {
+	font-size: 16px;
+	color: SteelBlue;
+	font-weight: 800;
 }
