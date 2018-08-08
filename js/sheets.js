@@ -9,22 +9,7 @@ function onInit(){
                          + "\"></input></th>";        
         document.getElementById("thead").appendChild(th);
     }
-
-    for (i = 1; i < numbers; i++) {
-        var tr = document.createElement("tr");
-            tr.innerHTML = "<tr><td><input type=\"text\" disabled class=\"main_tabs tabs\" value=\""
-                         + i
-                         + "\"></input></td></tr>";        
-        document.getElementById("tbody").appendChild(tr);
-        for (j = 0; j <= 25; j++) {
-            var newCell = tr.insertCell(-1);
-            newCell.innerHTML = "<td><input type=\"text\" class=\"tabs\" value=\""
-                              + "\" id=\""
-                              + letters[j+1] + i 
-                              + "\" onchange=\"calculate(this)\"></input></td>";
-        }
-    }
-    addButton();
+    addRows();
 }
 
 function addRows() {
@@ -38,10 +23,14 @@ function addRows() {
         document.getElementById("tbody").appendChild(tr);
         for (j = 0; j <= 25; j++) {
             var newCell = tr.insertCell(-1);
-            newCell.innerHTML = "<td><input type=\"text\" class=\"tabs\" value=\""
-                              + "\" id=\""
-                              + letters[j+1] + i 
-                              + "\" onchange=\"calculate(this)\"></input></td>";
+            var id = letters[j+1] + i;
+            newCell.setAttribute('id', 't_' + id);
+            newCell.setAttribute('onClick', 'input_class(this)');
+            newCell.innerHTML = "<span class=\"eval_expression\" id=\""
+                              + 's_' + id
+                              + "\"></span><input type=\"text\" class=\"tabs tabs_hidden\" value=\"\" id=\""
+                              + 'i_' + id 
+                              + "\" onchange=\"calculate(this)\"></input>";
         }
     }
     addButton();
@@ -58,16 +47,29 @@ function deleteButton(){
 }
 
 function calculate(value){
-  var id = value.getAttribute('id');
+  var s_id = 's' + value.getAttribute('id').substr(1);
   var expression = value.value; 
     if(expression.charAt(0) == '=') {
       var expression = expression.substr(1); 
         if(typeof +expression == 'number') {
-      document.getElementById(id).value = eval(expression);
+          document.getElementById(s_id).innerHTML = eval(expression);
       } else {
         alert('Is not a number!');
       }
     } else {
       alert('Expression must start by "="');
     }
+}
+
+function  input_class(t_id){
+    var i_id = 'i' + t_id.getAttribute('id').substr(1);
+    var otherCell = document.getElementsByClassName('tabs_visible')[0];
+  if(otherCell === undefined) {
+    document.getElementById(i_id).setAttribute('class', 'tabs tabs_visible');
+  } else {
+    otherCell.setAttribute('class', 'tabs tabs_hidden');
+    document.getElementById(i_id).setAttribute('class', 'tabs tabs_visible');
+  } 
+  document.getElementById('formula_textarea').value = document.getElementById(i_id).value;
+  document.getElementById('currentCell').innerHTML = 'Current cell: ' + i_id.substr(2);
 }

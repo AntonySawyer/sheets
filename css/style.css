@@ -28,6 +28,13 @@ nav a:hover {
 	border-color: CadetBlue;
 }
 
+textarea {
+	width: 1323px;	
+	height: 18px;	
+	margin-bottom: 5px;
+	margin-top: 	5px;
+}
+
 table {
 	border-collapse: collapse;
 }
@@ -67,12 +74,33 @@ input[type=text]:focus {
 .tabs {
 	width: 48px;
 	margin: 0;
-	cursor: cell;
 }
 
-td:hover + td>input {
+.tabs_hidden {
+	visibility: hidden;
+	display:none;
+}
+
+.tabs_visible {
+	display: table-cell;
+	background-color: cyan;
+}
+
+.eval_expression {
+	
+}
+
+tbody td {
+	cursor: cell;	
+}
+
+td:hover {
     background-color: lightcyan;
-    background: linear-gradient(to left, rgba(224, 255, 255, 0) 60%, rgba(224, 255, 255, 0.7)); /*lightcyan*/
+}
+
+td:hover + td {
+    background-color: lightcyan; /*for browsers whitch not-supported gradient */
+    background: linear-gradient(to left, rgba(224, 255, 255, 0) 50%, rgba(224, 255, 255, 0.7)); /*lightcyan*/
 }
 
 .main_tabs {
@@ -82,7 +110,8 @@ td:hover + td>input {
 }
 
 nav,
-thead th {
+thead th,
+.textarea {
 	position: -webkit-sticky;
 	position: -moz-sticky;
 	position: -ms-sticky;
@@ -91,7 +120,23 @@ thead th {
 	top: 0;
 }
 
-thead th {
-	top: 29px;
+.textarea {
+	background-color: 	white;
+	top: 22px;
 }
 
+thead th {
+	top: 54px;
+}
+
+textarea {
+	height: 23px;
+	resize: none;
+	outline: none;	
+	overflow: hidden;
+	font-size: 15px;
+}
+
+#currentCell {
+	font-size: 16px;
+}
